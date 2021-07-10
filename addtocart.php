@@ -15,7 +15,7 @@
 		}
 		else
 		{
-			$cartid=rand(0000,9999);
+			$cartid=rand(000000,9999999);
 			$_SESSION["cartid"]=$cartid;
 		}
 		$itemid=$_POST["itemid"];

@@ -336,16 +336,18 @@
 			while($row=mysqli_fetch_array($result))
 			{
 				echo '<div class="w3-container w3-border-bottom" style="padding:8px">
-						<div class="w3-left" style="width:30%">
-							<img src="'.$row["image"].'" style="width:50%;">
+						<div class="w3-left" style="width:10%">
+							<img src="'.$row["image"].'" style="width:100%;">
 						</div>
-						<div class="w3-left w3-small" style="padding-left:5px; width:50%;">
+						<div class="w3-left w3-small" style="padding-left:20px; width:50%;">
 							<span style="text-align:left;">'.$row["name"].'</span><br>
-							<span style="text-align:left;">Quantity: '.$row["qty"].'</span><br>
 							<span style="text-align:left; color:Red;">Rs. '.$row["rate"].'</span>
 						</div>
-						<div class="w3-left w3-center" style="padding-left:5px; padding-top:24px;">
-							<a href="delfromcart.php?delid='.$row["itemid"].'" onclick="w3_open()"><button class="w3-pale-yellow w3-circle"><i class="fa fa-minus w3-large w3-text-red"></i></button></a>
+						<div class="w3-right w3-center" style="padding-left:20px; display:flex;">
+							<a href="cartactions.php?itemid='.$row["itemid"].'&cartoperation=minus" onclick="w3_open()"><button class="w3-pale-yellow w3-circle" style="margin-right:10px;"><i class="fa fa-minus w3-large w3-text-grey"></i></button></a>
+							<span style="text-align:left;margin-right:10px;">'.$row["qty"].'</span>
+							<a href="cartactions.php?itemid='.$row["itemid"].'&cartoperation=plus" onclick="w3_open()"><button class="w3-pale-yellow w3-circle" style="margin-right:30px;"><i class="fa fa-plus w3-large w3-text-grey"></i></button></a>
+							<a href="cartactions.php?itemid='.$row["itemid"].'&cartoperation=delete" onclick="w3_open()"><button class="w3-pale-yellow w3-circle"><i class="fa fa-trash w3-large w3-text-red"></i></button></a>
 						</div>
 					</div>';
 				$tot=$tot+$row["rate"];
