@@ -1,7 +1,29 @@
 <?php
 session_start();
+include "connect.php";
 $bid = $_GET["bid"];
 $phone = '91' . $_GET["phone"];
+
+// Account details
+// $apiKey = urlencode('Nzg0NDcyMzA3NzM4NDk2YjZiNDEzNDQ5NGU3OTY2NjY=');
+// // Message details
+// $numbers = array(918486941128, 91970665354);
+// $sender = urlencode('TXTLCL');
+// $message = rawurlencode('this is a test message');
+ 
+// $numbers = implode(',', $numbers);
+ 
+// // Prepare data for POST request
+// $data = array('apikey' => $apiKey, 'numbers' => $numbers, 'sender' => $sender, 'message' => $message);
+// // Send the POST request with cURL
+// $ch = curl_init('https://api.textlocal.in/send/');
+// curl_setopt($ch, CURLOPT_POST, true);
+// curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// $response = curl_exec($ch);
+// curl_close($ch);
+// // Process your response here
+// echo $response;
 
 // Authorisation details.
 $username = "kakulborah21@gmail.com";
@@ -24,6 +46,18 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $result = curl_exec($ch); // This is the result from the API
 curl_close($ch);
+
+$result = mysqli_query($con,"SELECT * from orders where bid = '$bid'");
+$orderExist = mysqli_num_rows($result);
+
+if($orderExist > 0) {
+	$orderRow = mysqli_fetch_assoc($result);
+	$cartid = $orderRow['cartid'];
+	mysqli_query($con,"UPDATE cart set status = 'bought' where cartid='$cartid'");
+}
+
+$cartid=rand(000000,999999);
+$_SESSION["cartid"]=$cartid;
 ?>
 
 <!doctype html>

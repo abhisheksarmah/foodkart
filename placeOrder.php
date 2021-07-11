@@ -156,7 +156,7 @@ include "connect.php";
 			<?php
 			$total = 0;
 			$cartid = $_GET["cartid"];
-			$sql = "Select A.*,B.* from cart as A,items as B where A.cartid='$cartid' and A.itemid=B.itemid";
+			$sql = "Select A.*,B.* from cart as A,items as B where A.cartid='$cartid' and A.status = 'added' and A.itemid=B.itemid";
 			$result = mysqli_query($con, $sql);
 			while ($row = mysqli_fetch_array($result)) {
 				echo '<div class="w3-container w3-center w3-border-bottom" style="width:90%;padding:8px;">
@@ -185,7 +185,7 @@ include "connect.php";
 		</div>
 		<h3 align="center">Enter Your Delivery Address</h3>
 		<div class="w3-container w3-card-2 w3-white w3-padding-16" style="width:60%; margin:0 auto;">
-			<form id="form2" method="post" action="payment.php">
+			<form id="form2" method="post" action="confirmorder.php">
 				<input type="hidden" name="amount" required class="w3-input w3-border" value="<?php echo $total; ?>">
 				<p><input type="text" name="name" required class="w3-input w3-border" placeholder="Enter Name"></p>
 				<p><textarea name="address" required class="w3-input w3-border" placeholder="Enter Address"></textarea></p>

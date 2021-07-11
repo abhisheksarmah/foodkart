@@ -15,7 +15,7 @@
 		}
 		else
 		{
-			$cartid=rand(000000,9999999);
+			$cartid=rand(000000,999999);
 			$_SESSION["cartid"]=$cartid;
 		}
 		$itemid=$_POST["itemid"];
@@ -23,7 +23,7 @@
 		$uname=$_SESSION["email"];
 		$rate=0;
 		
-		$rec=mysqli_query($con,"Select * from cart where cartid='$cartid' and itemid='$itemid'");
+		$rec=mysqli_query($con,"Select * from cart where cartid='$cartid' and itemid='$itemid' and status != added");
 		$n=mysqli_num_rows($rec);
 		if($n>0)
 		{

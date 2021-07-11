@@ -26,8 +26,6 @@
         <div class="w3-container">
           <table class="w3-table-all w3-small">
             <tr class="w3-red">
-                <td>Cart ID</td>
-                <td>Customer Name</td>
                 <td>Item</td>
                 <td>Quantity</td>
                 <td>Rate</td>
@@ -43,8 +41,6 @@
                 while($row=mysqli_fetch_array($result))
                 {
                   echo '<tr>';
-                  echo '<td>'.$row[0].'</td>';
-                  echo '<td>'.$row["cname"].'</td>';
                   echo '<td>'.$row["itemname"].'</td>';
                   echo '<td>'.$row[3].'</td>';
                   echo '<td>'.$row[4].'</td>';

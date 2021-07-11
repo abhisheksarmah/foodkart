@@ -1,8 +1,8 @@
 <?php
 session_start();
 include "connect.php";
-$bid = 3333;
-$amount = 132213;
+$bid = $_GET['bid'];
+$amount = $_GET['amount'];
 ?>
 <!doctype html>
 <html>
@@ -94,7 +94,7 @@ $amount = 132213;
 				<img src="images/instamojo.png" style="width:60%">
 			</div>
 			<div class="container black center">
-				<h4>Hotel Booking Payment</h4>
+				<h4>Food delivery payment</h4>
 				<h4>Amount: Rs. <?php echo $amount; ?></h4>
 			</div>
 
@@ -103,7 +103,7 @@ $amount = 132213;
 				<p align="center">
 					<strong>Payment Method: Credit/Debit Card</strong><br>
 				</p>
-				<input name="bid" type="hidden" class="input border" value="<?php echo $_GET["bid"]; ?>">
+				<input name="bid" type="hidden" class="input border" value="<?php echo $bid; ?>">
 				<input name="phone" type="hidden" class="input border" value="<?php echo $_GET["phone"]; ?>">
 				<p>
 					<label>Enter 16 digit Card No</label>

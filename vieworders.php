@@ -3,12 +3,8 @@
     if(isset($_GET["oid"]))
     {
         $oid=$_GET["oid"];
-        $str="Select cartid from orders where orderid='$oid'";
-        $rec=mysqli_query($con,$str);
-        $row=mysqli_fetch_array($rec);
-        $cartid=$row["cartid"];
         
-        $str="update cart set status='Completed' where cartid='$cartid'";
+        $str="update orders set status='Completed' where orderid='$oid'";
         mysqli_query($con,$str);
         echo '<script>window.location.href="vieworders.php";</script>'; 
     }
@@ -65,7 +61,7 @@
         </tr>
         
         <?php
-				$sql="Select A.orderid,B.name,A.date,sum(C.rate) from orders as A,users as B,cart as C where A.cartid=C.cartid and C.status='ordered' and B.email=C.email group by C.email";
+				$sql="Select distinct A.orderid,B.name,A.date, A.amount, A.status from orders as A, users as B, cart as C where A.cartid=C.cartid and B.email=A.email";
 				$result=mysqli_query($con,$sql);
 				while($row=mysqli_fetch_array($result))
 					{
@@ -74,8 +70,13 @@
 						echo "<td>".$row[1]."</td>";
 						echo "<td>".$row[2]."</td>";
 						echo "<td>".$row[3]."</td>";
-            echo '<td><a href="viewodetails.php?oid='.$row[0].'" class="w3-btn w3-green w3-round w3-small">View Order Details</a></td>';
-            echo '<td><a href="vieworders.php?oid='.$row[0].'" class="w3-btn w3-red w3-round w3-small">Order Completed</a></td>';
+            echo '<td><a href="viewodetails.php?oid='.$row[0].'" class="">View Order Details</a></td>';
+            if($row[4] == 'Completed') {
+                echo '<td><a href="#" class="w3-btn w3-light-green w3-round w3-small">'.$row[4].'</a></td>';
+
+            } else {
+                echo '<td><a href="vieworders.php?oid='.$row[0].'" class="w3-btn w3-amber w3-round w3-small">'.$row[4].'</a></td>';
+            }
 						echo "</tr>";
 					}
         ?>

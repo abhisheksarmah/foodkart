@@ -324,7 +324,7 @@
 			$cartid=$_SESSION["cartid"];	
 		}
         $tot=0;
-		$sql="Select A.*,B.* from cart as A,items as B where A.cartid='$cartid' and A.itemid=B.itemid";
+		$sql="Select A.*,B.* from cart as A,items as B where A.cartid='$cartid' and A.itemid=B.itemid and A.status='added'";
 		$result=mysqli_query($con,$sql);
 		$x=mysqli_num_rows($result);
 		if($x==0)
